@@ -1,21 +1,25 @@
-import React from 'react';
-import './App.css';
-const { useState } = React;
+//In the Settings for this pen, I've selected Babel for a Javascript preprocessor. 
+//I also brought in  'React' and 'ReactDOM' libraries via the Codepen's 'Quick Add' feature.
+//The React CDN allows me to construct the Application component used to create the form.
+//The ReactDOM CDN is necessary to access the React's virtual DOM and renders the JSX to the page.
 
-function App() {
-  const [props, setProps] = useState<{
-    display: boolean;
-    firstName: string;
-    lastName: string;
-    phone: number;
-    email: string;
-  }>({
-    display: false,
-    firstName: "",
-    lastName: "",
-    phone: 0,
-    email: "",
-  })
+
+class Application extends React.Component {
+  constructor(props) {
+    super(props)
+
+    //the Application component's state is below, which records the user's input. 
+
+    this.state = {
+
+      //the display property on state allows me to toggle the view of the form vs. the view of the user's data
+      display: false,
+      firstName: "",
+      lastName: "",
+      phone: 0,
+      email: "",
+    };
+  }
 
   inputCheck = (e) => {
     let filter = e.target.getAttribute('filter')
@@ -83,13 +87,11 @@ function App() {
       </div>
     )
   }
-  // render() {
-  {/* Here in the render method, I'm returning a ternary operator that displays either the form, or the user's data, depending on the boolean value that is currently set to this.state.display*/ }
-  return (
-    state.display ? displayData() : displayForm(); 
-      )
-  // }
+  render() {
+    {/* Here in the render method, I'm returning a ternary operator that displays either the form, or the user's data, depending on the boolean value that is currently set to this.state.display*/ }
+    return this.state.display ? this.displayData() : this.displayForm();
+  }
 }
 
-
-export default App;
+{/*Here, I'm invoking the ReactDOM and connected. Here is where this Application component is being connected to the HTML portion of the pen, and thus displaying the form on the page */ }
+ReactDOM.render(<Application />, document.getElementById('app'));
